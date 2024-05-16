@@ -1,0 +1,5 @@
+src/config
+
+*/**/*.pyc
+
+dlouhy_report.py

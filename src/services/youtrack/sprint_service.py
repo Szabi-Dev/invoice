@@ -30,7 +30,6 @@ def get_sprints(youtrack_config):
     url = youtrack_config.url + postfix;
     url = url_builder.add_param_to_url(url, PARAM_FIELDS, str(PARAM_FIELDS_VALUE));
     url = url_builder.add_param_to_url(url, PARAM_TOP, str(PARAM_TOP_VALUE));
-    print(url)
     response = requests.get(url, headers=Headers);
     return response.json();
 

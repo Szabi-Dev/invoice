@@ -17,11 +17,11 @@ def get_sprints_in_interval(youtrack_config, datemodel):
     for e in response:
         if e['finish'] != None and e['start'] < datemodel.end_in_ms and e['finish'] > datemodel.start_in_ms:
             sprints.append(e);
-    #sprints.sort(key=sortSprint);
-    #sprints[0]['start'] = datemodel.start_in_ms;
-    #sprints[-1]['finish'] = datemodel.end_in_ms;
-    #for sp in sprints:
-    #    sp['finish'] = sp['finish'] - 86400000;
+    sprints.sort(key=sortSprint);
+    sprints[0]['start'] = datemodel.start_in_ms;
+    sprints[-1]['finish'] = datemodel.end_in_ms;
+    for sp in sprints:
+        sp['finish'] = sp['finish'] - 86400000;
     return sprints;  
 
 def get_sprints(youtrack_config):

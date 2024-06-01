@@ -18,3 +18,6 @@ def get_monthly_date_interval(year, month):
 def date_string_to_millisec(date_string):
     dt = datetime.strptime(date_string,'%d.%m.%Y');
     return dt.timestamp() * 1000;    
+
+def millisec_to_date_string(milliseconds):
+    return datetime.fromtimestamp(milliseconds/1000.0).strftime("%Y-%m-%d") 

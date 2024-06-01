@@ -1,5 +1,7 @@
 
 import requests
+from models.date.date_model import DateModel
+from services.date.date_service import millisec_to_date_string
 from services.url import url_builder
 
 
@@ -18,13 +20,24 @@ PARAM_START_DATE="startDate";
 PARAM_END_DATE="endDate";
 
 
-def get_workitems_for_interval(youtrack_config, datemodel):
+def get_workitems_for_sprint(youtrack_config, sprint):
+    start_date = millisec_to_date_string(sprint['start']);
+    end_date = millisec_to_date_string(sprint['finish']);
+    return get_workitems_for_interval(youtrack_config, start_date, end_date);
+
+def get_workitems_for_interval(youtrack_config, start_date, end_date):
     Headers = { "Authorization" : "Bearer " + youtrack_config.token }
     url = youtrack_config.url + WORKITEM_URL;
     url = url_builder.add_param_to_url(url, PARAM_FIELDS, str(PARAM_FIELDS_VALUE));
     url = url_builder.add_param_to_url(url, PARAM_TOP, str(PARAM_TOP_VALUE));
     url = url_builder.add_param_to_url(url, PARAM_AUTHOR, str(PARAM_AUTHOR_VALUE));
-    url = url_builder.add_param_to_url(url, PARAM_START_DATE, str(datemodel.start_in_ms));
-    url = url_builder.add_param_to_url(url, PARAM_END_DATE, str(datemodel.end_in_ms));
+    url = url_builder.add_param_to_url(url, PARAM_START_DATE, str(start_date));
+    url = url_builder.add_param_to_url(url, PARAM_END_DATE, str(end_date));
     response = requests.get(url, headers=Headers);
     return response.json();
+
+def calculate_workitem_duration_in_hours(workItems):
+    allminutes = 0;
+    for item in workItems:
+        allminutes = allminutes + item['duration']['minutes'];
+    return allminutes / 60;

@@ -1,7 +1,18 @@
 import configparser
-import os;
+import os
+
+from models.config.youtrack_config_model import YoutrackConfigModel;
 
 PROJECT_PATH = "src/config/";
+
+
+def parse_youtrack_config(config_path):
+    config = parse_project_config(config_path);
+    return YoutrackConfigModel(
+      config['YOUTRACK']['url'],
+      config['YOUTRACK']['project'],
+      config['YOUTRACK']['token']
+    );
 
 
 def parse_project_config(config_path):

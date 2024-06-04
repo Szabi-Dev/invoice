@@ -13,7 +13,6 @@ sprintNumber = str(input())
 sprint = sprint_service.get_sprint(config, sprintNumber)
 workItems = get_workitems_for_sprint(config, sprint)
 
-
 workitems_per_day = create_work_items_per_day_dict(workItems);
 
 

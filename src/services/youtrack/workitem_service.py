@@ -11,7 +11,7 @@ PARAM_TOP = "$top";
 PARAM_TOP_VALUE = 10000;
 
 PARAM_FIELDS = "fields";
-PARAM_FIELDS_VALUE = "created,duration(presentation,minutes),author(name),id";
+PARAM_FIELDS_VALUE = "created,duration(presentation,minutes),author(name),id,date";
 
 PARAM_AUTHOR="author"
 PARAM_AUTHOR_VALUE = "me"

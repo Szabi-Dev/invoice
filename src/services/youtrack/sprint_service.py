@@ -24,6 +24,13 @@ def get_sprints_in_interval(youtrack_config, datemodel):
         sp['finish'] = sp['finish'] - 86400000;
     return sprints;  
 
+def get_sprint(youtrack_config, sprintNumber):
+    response = get_sprints(youtrack_config);
+    for e in response:
+        if sprintNumber in e['name']:
+            return e;
+    return None;
+
 def get_sprints(youtrack_config):
     postfix = SPRINT_URL.replace("{projectId}", str(youtrack_config.project));
     Headers = { "Authorization" : "Bearer " + youtrack_config.token }

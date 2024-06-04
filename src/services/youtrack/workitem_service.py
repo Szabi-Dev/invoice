@@ -1,7 +1,7 @@
 
 import requests
 from models.date.date_model import DateModel
-from services.date.date_service import millisec_to_date_string
+from services.date.date_service import millisec_to_date_string, millisec_to_date_with_name_of_the_week
 from services.url import url_builder
 
 
@@ -41,3 +41,12 @@ def calculate_workitem_duration_in_hours(workItems):
     for item in workItems:
         allminutes = allminutes + item['duration']['minutes'];
     return allminutes / 60;
+
+def create_work_items_per_day_dict(workItems):
+    workitems_per_day = {}
+    for w in workItems:
+        day = millisec_to_date_with_name_of_the_week(w['date'])
+        if not day in workitems_per_day:
+            workitems_per_day[day] = []
+        workitems_per_day[day].append(w);
+    return workitems_per_day;
